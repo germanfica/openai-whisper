@@ -1,0 +1,12 @@
+[project]
+name = "whisper-transcriber"
+version = "0.1.0"
+requires-python = ">=3.10,<3.11"
+dependencies = [
+    "openai-whisper",
+    "torch",
+    "torchaudio",
+    "numpy",
+    "tqdm",
+    "ffmpeg-python",
+]
