@@ -17,3 +17,7 @@ pip install -r requirements.txt
 ```bash
 whisper "audio.mp3" --language Japanese --model small
 ```
+
+```bash
+uv run whisper "audio.mp3" --language Japanese --model small
+```
