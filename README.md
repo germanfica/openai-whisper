@@ -3,6 +3,8 @@
 ## Prerequisites
 
 - Python 3.10.22
+- uv
+- FFmpeg
 
 ## Install
 
