@@ -14,6 +14,10 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
+```
+uv sync --locked
+```
+
 ## Usage
 
 ```bash
