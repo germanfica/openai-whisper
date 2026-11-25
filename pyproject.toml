@@ -7,6 +7,4 @@ dependencies = [
 ]
 
 [dependency-groups]
-dev = [
-    "pyinstaller>=6,<7",
-]
+dev = []
