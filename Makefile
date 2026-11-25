@@ -10,13 +10,8 @@ setup: install-uv
 	@echo "Installing Python..."
 	@$(UV) python install
 
-	@echo "Creating virtual environment..."
-	@$(UV) venv
-
 	@echo "Installing dependencies..."
-	@$(UV) pip install \
-		--python $(PYTHON) \
-		-r requirements.txt
+	@$(UV) sync --locked
 
 	@echo "Project ready."
 
