@@ -3,41 +3,22 @@ ifeq ($(OS),Windows_NT)
 	.SHELLFLAGS := /C
 	UV := uv
 	PYTHON := .venv\Scripts\python.exe
-	EXECUTABLE := dist\whisper\whisper.exe
 else
 	SHELL := /bin/bash
 	UV := $(shell command -v uv 2>/dev/null || printf '%s/.local/bin/uv' "$$HOME")
 	PYTHON := .venv/bin/python
-	EXECUTABLE := dist/whisper/whisper
 endif
 
 APP := main.py
-APP_NAME := whisper
-BUILD_DIR := build
-DIST_DIR := dist
 
-PYINSTALLER_FLAGS := \
-	--clean \
-	--noconfirm \
-	--onedir \
-	--console \
-	--noupx \
-	--name $(APP_NAME) \
-	--distpath $(DIST_DIR) \
-	--workpath $(BUILD_DIR)/pyinstaller \
-	--specpath $(BUILD_DIR) \
-	--collect-data whisper \
-	--collect-all tiktoken \
-	--collect-submodules tiktoken_ext
-
-.PHONY: setup install-uv run build test clean reset
+.PHONY: setup install-uv run test clean reset
 
 setup: install-uv
 	@echo Installing Python...
 	@"$(UV)" python install
 
 	@echo Installing dependencies...
-	@"$(UV)" sync --locked --dev
+	@"$(UV)" sync --locked
 
 	@echo Project ready.
 
@@ -61,13 +42,8 @@ endif
 run: setup
 	@"$(PYTHON)" "$(APP)" $(ARGS)
 
-build: setup
-	@echo Building Whisper...
-	@"$(PYTHON)" -m PyInstaller $(PYINSTALLER_FLAGS) "$(APP)"
-	@echo Build completed: $(EXECUTABLE)
-
-test:
-	@"$(EXECUTABLE)" --help
+test: setup
+	@"$(PYTHON)" "$(APP)" --help
 
 clean:
 ifeq ($(OS),Windows_NT)
